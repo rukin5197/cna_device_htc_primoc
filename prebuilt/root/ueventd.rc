@@ -27,6 +27,10 @@
 /dev/kgsl-2d0             0666   root       root
 /dev/kgsl-2d1             0666   root       root
 
+<<<<<<< HEAD
+=======
+# these should not be world writable
+>>>>>>> upstream/jellybean
 /dev/diag_arm9            0660   radio      radio
 /dev/android_adb          0660   adb        adb
 /dev/android_adb_enable   0660   adb        adb

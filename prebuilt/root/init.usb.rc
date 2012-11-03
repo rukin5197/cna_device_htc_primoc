@@ -9,6 +9,7 @@ on property:sys.usb.config=none
 # This should only be used during device bringup
 # and as a fallback if the USB manager fails to set a standard #configuration
 on property:sys.usb.config=adb
+<<<<<<< HEAD
 #   write /sys/class/android_usb/android0/enable 0
 #   write /sys/class/android_usb/android0/idVendor 18d1
 #   write /sys/class/android_usb/android0/idProduct D002
@@ -16,6 +17,9 @@ on property:sys.usb.config=adb
 #   write /sys/class/android_usb/android0/enable 1
 #
 #   write /sys/devices/platform/android_usb/usb_function_switch 3
+=======
+
+>>>>>>> upstream/jellybean
     start adbd
     write /sys/class/android_usb/android0/f_adb/on 1
     setprop sys.usb.state $sys.usb.config
@@ -89,21 +93,27 @@ on property:sys.usb.config=mass_storage,diag,modem,modem_mdm,diag_mdm,rmnet
 
 # USB accessory configuration
 on property:sys.usb.config=accessory
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 18d1
 #    write /sys/class/android_usb/android0/idProduct 2d00
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     write /sys/devices/platform/android_usb/usb_function_switch 8192
     setprop sys.usb.state $sys.usb.config
 
 # USB accessory configuration, with adb
 on property:sys.usb.config=accessory,adb
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 18d1
 #    write /sys/class/android_usb/android0/idProduct 2d01
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     start adbd
     write /sys/devices/platform/android_usb/usb_function_switch 8194
     setprop sys.usb.state $sys.usb.config
@@ -114,22 +124,28 @@ on property:persist.sys.usb.config=*
     setprop sys.usb.config $persist.sys.usb.config
 
 on property:sys.usb.config=rndis
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 0bb4
 #    write /sys/class/android_usb/android0/idProduct 0ffe
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/bDeviceClass 224
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     write /sys/devices/platform/android_usb/usb_function_switch 4
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=rndis,adb
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 0bb4
 #    write /sys/class/android_usb/android0/idProduct 0ffc
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/bDeviceClass 224
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     start adbd
     write /sys/devices/platform/android_usb/usb_function_switch 6
     setprop sys.usb.state $sys.usb.config
@@ -157,20 +173,26 @@ on property:sys.usb.config=cdc_ethernet
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mtp
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 0bb4
 #    write /sys/class/android_usb/android0/idProduct 0c93
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     write /sys/devices/platform/android_usb/usb_function_switch 128
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mtp,adb
+<<<<<<< HEAD
 #    write /sys/class/android_usb/android0/enable 0
 #    write /sys/class/android_usb/android0/idVendor 0bb4
 #    write /sys/class/android_usb/android0/idProduct 0c93
 #    write /sys/class/android_usb/android0/functions $sys.usb.config
 #    write /sys/class/android_usb/android0/enable 1
+=======
+>>>>>>> upstream/jellybean
     start adbd
     write /sys/devices/platform/android_usb/usb_function_switch 130
     setprop sys.usb.state $sys.usb.config

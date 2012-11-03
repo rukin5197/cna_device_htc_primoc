@@ -7,6 +7,10 @@ on emmc
     devwait emmc@system
     mount ext4 emmc@system /system ro barrier=1
     devwait emmc@userdata
+<<<<<<< HEAD
+=======
+#   exec /system/bin/e2fsck -p emmc@userdata
+>>>>>>> upstream/jellybean
     mount ext4 emmc@userdata /data nosuid nodev barrier=1 noauto_da_alloc
     mount ext4 emmc@cache /cache nosuid nodev barrier=1
     mount ext4 emmc@devlog /devlog nosuid nodev barrier=1
@@ -15,7 +19,12 @@ on early-init
     device mtd@misc 0460 radio diag
 
 on init
+<<<<<<< HEAD
 
+=======
+    # double check the perms and set owner
+    # export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar:/system/framework/com.htc.commonctrl.jar:/system/framework/com.htc.framework.jar:/system/framework/com.htc.android.pimlib.jar:/system/framework/com.htc.android.easopen.jar:/system/framework/com.scalado.util.ScaladoUtil.jar:/system/framework/com.orange.authentication.simcard.jar:/system/framework/kafdex.jar
+>>>>>>> upstream/jellybean
     chown root root /devlog
     chmod 0700 /devlog
 
@@ -42,9 +51,15 @@ on boot
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+<<<<<<< HEAD
     chmod 0660                /sys/class/rfkill/rfkill0/state
 
 # Bluetooth MAC address path
+=======
+    chmod 0666                /sys/class/rfkill/rfkill0/state
+
+    # Bluetooth MAC address path
+>>>>>>> upstream/jellybean
     chown bluetooth bluetooth /sys/module/htc_bdaddress/parameters/bdaddress
     setprop ro.bt.bdaddr_path /sys/module/htc_bdaddress/parameters/bdaddress
 
@@ -150,6 +165,18 @@ service hciattach /system/bin/brcm_patchram_plus --enable_hci --no2bytes --baudr
     disabled
     oneshot
 
+<<<<<<< HEAD
+=======
+# Make sure we startup btld before hcid
+# Set target address to emulator host loopback IF
+# Limit baudrate to 460800 to ensure reliable uart operation
+service btld /system/bin/btld -lpm 1 -hb 3000000
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    onrestart restart bluetoothd
+
+>>>>>>> upstream/jellybean
 # wifi ++
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf -puse_p2p_group_interface=1
 #   we will start as root and wpa_supplicant will switch to user wifi

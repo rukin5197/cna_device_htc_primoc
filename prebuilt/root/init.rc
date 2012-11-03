@@ -6,7 +6,16 @@ on early-init
 
 # create mountpoints
     mkdir /mnt 0775 root system
+<<<<<<< HEAD
     mkdir /mnt/sdcard 0000 system system
+=======
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0775 root system
+    mkdir /storage/sdcard0 0000 system system
+    # for backwards compatibility
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+>>>>>>> upstream/jellybean
 
 on init
 
@@ -22,7 +31,10 @@ loglevel 3
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
+<<<<<<< HEAD
     export EXTERNAL_STORAGE /mnt/sdcard
+=======
+>>>>>>> upstream/jellybean
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
@@ -30,7 +42,10 @@ loglevel 3
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
+<<<<<<< HEAD
     symlink /mnt/sdcard /sdcard
+=======
+>>>>>>> upstream/jellybean
 
 # Right now vendor lives on the same filesystem as system,
 # but someday that may change.
@@ -109,8 +124,11 @@ loglevel 3
 # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
 
+<<<<<<< HEAD
 on fs
 
+=======
+>>>>>>> upstream/jellybean
 on post-fs
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
@@ -312,6 +330,7 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
+<<<<<<< HEAD
 
     # allow system to modify cpufreq control files
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -320,6 +339,33 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+=======
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+
+    # allow system to modify cpufreq control files
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0666 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0666 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0666 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown root system /sys/block/mmcblk0/queue/scheduler
+    chmod 0666 /sys/block/mmcblk0/queue/scheduler
+>>>>>>> upstream/jellybean
 
 # HTC SSD Peripheral UI - BEGIN
     chown system system /sys/class/leds/red/brightness
@@ -393,6 +439,10 @@ on boot
     setprop system_init.startsurfaceflinger 0
 
 # Set error receiver
+<<<<<<< HEAD
+=======
+    setprop ro.error.receiver.htc.apps com.htc.feedback
+>>>>>>> upstream/jellybean
 
     start sysinit
 
@@ -549,10 +599,17 @@ service dbus /system/bin/dbus-daemon --system --nofork
     user bluetooth
     group bluetooth net_bt_admin
 
+<<<<<<< HEAD
 service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
     class main
     socket bluetooth stream 660 bluetooth bluetooth
     socket dbus_bluetooth stream 660 bluetooth bluetooth
+=======
+service bluetoothd /system/bin/bluetoothd -n
+    class main
+    socket bluetooth stream 666 bluetooth bluetooth
+    socket dbus_bluetooth stream 666 bluetooth bluetooth
+>>>>>>> upstream/jellybean
     # init.rc does not yet support applying capabilities, so run as root and
     # let bluetoothd drop uid to bluetooth with the right linux capabilities
     group bluetooth net_bt_admin misc
